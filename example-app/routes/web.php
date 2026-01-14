@@ -6,10 +6,15 @@ use App\Http\Controllers\GoogleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\PaypalController;
+use Inertia\Inertia;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
+// Inertia.js Routes
+Route::get('/', function () {
+    return Inertia::render('Home', [
+        'comics' => \App\Models\Comic::take(6)->get()
+    ]);
+})->name('home');
 
 // Route::get('/stripe', [StripeController::class, 'pay']);
 // Route::get('/paypal', [PaypalController::class, 'pay']);
