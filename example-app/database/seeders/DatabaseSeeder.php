@@ -21,5 +21,10 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        \App\Models\Comic::factory(10)->create();
+        \App\Models\Chapter::factory(10)->create();
+        \App\Models\ChapterImage::factory(10)->create();
+        \App\Models\Tag::factory(10)->create();
     }
 }
