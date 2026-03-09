@@ -36,6 +36,12 @@ class AppServiceProvider extends ServiceProvider
             return new \App\Services\SingletonRandomService();
         });
 
+        // 3. Scoped Binding (scoped): Giống singleton trong 1 request, nhưng reset sau mỗi request
+        // Rất hữu ích cho Laravel Octane hoặc Queue Workers
+        $this->app->scoped(\App\Services\ScopedRandomService::class, function ($app) {
+            return new \App\Services\ScopedRandomService();
+        });
+
         // Simple Binding: Bất cứ khi nào AlertSystem được yêu cầu, hãy trả về EmailAlert
         $this->app->bind(
             \App\Services\AlertSystem::class,
