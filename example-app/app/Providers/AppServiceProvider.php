@@ -25,6 +25,22 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(\App\Services\BankTransferPayment::class, function ($app) {
             return new \App\Services\BankTransferPayment('Vietcombank');
         });
+
+        // 1. Standard Binding (bind): Tạo mới mỗi lần gọi
+        $this->app->bind(\App\Services\StandardRandomService::class, function ($app) {
+            return new \App\Services\StandardRandomService();
+        });
+
+        // 2. Singleton Binding (singleton): Chỉ tạo 1 lần duy nhất, dùng lại cho các lần sau
+        $this->app->singleton(\App\Services\SingletonRandomService::class, function ($app) {
+            return new \App\Services\SingletonRandomService();
+        });
+
+        // Simple Binding: Bất cứ khi nào AlertSystem được yêu cầu, hãy trả về EmailAlert
+        $this->app->bind(
+            \App\Services\AlertSystem::class,
+            \App\Services\EmailAlert::class
+        );
     }
 
     /**

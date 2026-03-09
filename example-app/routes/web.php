@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AlertController;
+use App\Http\Controllers\BindingController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\ComicController;
 use App\Http\Controllers\GoogleController;
@@ -19,6 +21,9 @@ Route::get('/', function () {
 // Route::get('/stripe', [StripeController::class, 'pay']);
 // Route::get('/paypal', [PaypalController::class, 'pay']);
 // Route::get('/bank', [\App\Http\Controllers\BankTransferController::class, 'pay']);
+
+Route::get('/alert', [AlertController::class, 'send']);
+Route::get('/binding-check', [BindingController::class, 'index']);
 
 Route::prefix('api/comics')->group(function () {
     Route::get('/', [ComicController::class, 'index']);
